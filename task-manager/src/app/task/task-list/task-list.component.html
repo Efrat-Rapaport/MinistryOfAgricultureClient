@@ -1,0 +1,43 @@
+<p-table [value]="tasks" [paginator]="true" [rows]="pageSize" [sortField]="defaultSortField"
+    [sortOrder]="defaultSortOrder">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+            <th pSortableColumn="type">סוג <p-sortIcon field="type"></p-sortIcon></th>
+            <th pSortableColumn="name">שם <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="description">תיאור <p-sortIcon field="description"></p-sortIcon></th>
+            <th pSortableColumn="startDate">תאריך התחלה <p-sortIcon field="startDate"></p-sortIcon></th>
+            <th pSortableColumn="endDate">תאריך סיום <p-sortIcon field="endDate"></p-sortIcon></th>
+            <th>משימה מחזורית</th>
+            <th>הסתיימה</th>
+            <th>ארכיון</th>
+            <th>פעולות</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-task>
+        <tr>
+            <td>{{task.id}}</td>
+            <td>{{task.taskType}}</td>
+            <td>{{task.name}}</td>
+            <td>{{task.description}}</td>
+            <td>{{task.startDate | date}}</td>
+            <td>{{task.endDate | date}}</td>
+            <td>
+                <input type="checkbox" [(ngModel)]="task.isRecurring" disabled />
+            </td>
+            <td>
+                <input type="checkbox" [(ngModel)]="task.completed" />
+            </td>
+
+            <td>{{ task.archived ? 'Yes' : 'No' }}</td>
+            <td>
+                <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success"
+                    (click)="editTask(task.id)"></button>
+                <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                    (click)="deleteTask(task.id)"></button>
+                <button pButton type="button" icon="pi pi-archive" class="p-button-rounded p-button-warning"
+                    (click)="moveToArchiveTask(task.id)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

@@ -1,0 +1,56 @@
+<div class="form-container">
+    <h2>יצירת משימה חדשה</h2>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <div class="p-fluid p-grid">
+            <!-- שם המשימה -->
+            <div class="p-field p-col-12 p-md-6">
+                <label for="name">שם המשימה:</label>
+                <input id="name" pInputText formControlName="name" type="text" />
+            </div>
+
+            <!-- מועד התחלה -->
+            <div class="p-field p-col-12 p-md-6">
+                <label for="startDate">מועד התחלה:</label>
+                <p-calendar id="startDate" formControlName="startDate" dateFormat="dd/mm/yy"></p-calendar>
+            </div>
+
+            <!-- מועד סיום -->
+            <div class="p-field p-col-12 p-md-6">
+                <label for="endDate">מועד סיום:</label>
+                <p-calendar id="endDate" formControlName="endDate" dateFormat="dd/mm/yy"></p-calendar>
+            </div>
+
+            <!-- סוג משימה -->
+            <div class="p-field p-col-12 p-md-6">
+                <label for="taskType">סוג משימה:</label>
+                <p-dropdown id="taskType" formControlName="taskType" [options]="taskTypeOptions" optionLabel="label"
+                    optionValue="value" placeholder="בחר סוג משימה">
+                </p-dropdown>
+            </div>
+
+            <!-- משימה מחזורית -->
+            <div class="p-field-checkbox p-col-12">
+                <input type="checkbox" id="isRecurring" formControlName="isRecurring">
+                <label for="isRecurring">משימה מחזורית</label>
+            </div>
+
+            <!-- משימה בארכיון -->
+            <div class="p-field-checkbox p-col-12">
+                <input type="checkbox" id="archived" formControlName="archived">
+                <label for="archived">משימה בארכיון</label>
+            </div>
+
+            <!-- תיאור המשימה -->
+            <div class="p-field p-col-12">
+                <label for="description">תיאור המשימה:</label>
+                <textarea id="description" pInputTextarea formControlName="description"></textarea>
+            </div>
+
+            <!-- כפתורים -->
+            <div class="p-field p-col-12 button-container">
+                <button pButton type="button" label="חזרה" icon="pi pi-arrow-left" (click)="goBack()"></button>
+                <button pButton type="submit" label="שלח" icon="pi pi-check" [disabled]="taskForm.invalid"></button>
+            </div>
+        </div>
+    </form>
+</div>
